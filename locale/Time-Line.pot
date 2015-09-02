@@ -1,0 +1,71 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-03-23 12:35+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: Time-Line.pyw:64
+msgid "New project"
+msgstr ""
+
+#: Time-Line.pyw:65
+msgid "Project"
+msgstr ""
+
+#: Time-Line.pyw:81 Time-Line.pyw:159
+msgid "Start"
+msgstr ""
+
+#: Time-Line.pyw:84 Time-Line.pyw:160
+msgid "Press button to start the counter."
+msgstr ""
+
+#: Time-Line.pyw:90
+msgid "Add"
+msgstr ""
+
+#: Time-Line.pyw:93
+msgid "Delete"
+msgstr ""
+
+#: Time-Line.pyw:117
+msgid "Time-Line"
+msgstr ""
+
+#: Time-Line.pyw:125
+msgid "Stop"
+msgstr ""
+
+#: Time-Line.pyw:126
+msgid "Press button to stop and save the counter."
+msgstr ""
+
+#: Time-Line.pyw:183
+msgid "Info"
+msgstr ""
+
+#: Time-Line.pyw:184
+msgid "Please Enter a project name."
+msgstr ""
+
+#: Time-Line.pyw:223
+msgid "Confirmation"
+msgstr ""
+
+#: Time-Line.pyw:224
+#, python-format
+msgid "Are you sure you want to delete project %s and all his records?"
+msgstr ""
