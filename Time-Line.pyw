@@ -72,6 +72,15 @@ class TimerApp(QtGui.QWidget):
             )
         ''')
         self.db.commit()
+
+        self.db_cur.execute('''
+            CREATE TABLE IF NOT EXISTS settings (
+                name VARCHAR(255),
+                value VARCHAR(255)
+            )
+        ''')
+        self.db.commit()
+
         self.init_ui()
 
     def __del__(self):
@@ -95,6 +104,7 @@ class TimerApp(QtGui.QWidget):
 
         cbox_is_empty = self.cbox_list.count() <= 0
         self.cbox_list.setDisabled(cbox_is_empty)
+        self.cbox_list.activated.connect(self.on_change_cbox_list)
 
         # buttons
         self.btn_state = QtGui.QPushButton(_("Start"), self)
@@ -137,6 +147,41 @@ class TimerApp(QtGui.QWidget):
         self.setWindowIcon(QtGui.QIcon("icons/timer.png"))
         self.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
         self.show()
+
+    # save selected project into db for next run
+    def on_change_cbox_list(self):
+        index = self.cbox_list.currentIndex()
+
+        self.db_cur.execute('''
+            SELECT value
+            FROM settings
+            WHERE name = :name COLLATE NOCASE
+            LIMIT 1
+        ''', {"name": "last_project"})
+        result = self.db_fetch_assoc(["rowid"])
+
+        if result:
+            self.db_cur.execute('''
+                UPDATE settings
+                SET
+                    value = :value
+                WHERE name = :name
+            ''', {
+                "name": "last_project",
+                "value": int(index)
+            })
+            self.db.commit()
+        else:
+            self.db_cur.execute('''
+                INSERT INTO settings (
+                    name,
+                    value
+                ) VALUES (:name, :value)
+            ''', {
+                "name": "last_project",
+                "value": int(index)
+            })
+            self.db.commit()
 
     def on_clicked_btn_state(self):
         if not self.running:
@@ -346,6 +391,19 @@ class TimerApp(QtGui.QWidget):
         if hasattr(self, "projects") and len(self.projects) > 0:
             for cols in self.projects:
                 self.cbox_list.addItem(cols["name"], cols["id"])
+
+        # get previous selected project, if available
+        self.db_cur.execute('''
+            SELECT value
+            FROM settings
+            WHERE name = :name COLLATE NOCASE
+            LIMIT 1
+        ''', {"name": "last_project"})
+        result = self.db_fetch_assoc(["value"])
+
+        if len(result):
+            index = int(result[0]["value"])
+            self.cbox_list.setCurrentIndex(index)
 
     def strip_text(self, text):
         try:
