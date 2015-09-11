@@ -8,6 +8,9 @@ import gettext
 from PyQt4 import QtGui, QtCore
 from time import time, strftime
 
+import codecs
+codecs.register(lambda name: codecs.lookup('utf-8') if name == 'cp65001' else None)
+
 class TimerApp(QtGui.QWidget):
     # consts
     DB_NAME = "records.db"
