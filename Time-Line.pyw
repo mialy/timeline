@@ -5,11 +5,9 @@ import sys
 import os
 import sqlite3
 import gettext
+import codecs
 from PyQt4 import QtGui, QtCore
 from time import time, strftime
-
-import codecs
-codecs.register(lambda name: codecs.lookup('utf-8') if name == 'cp65001' else None)
 
 class TimerApp(QtGui.QMainWindow):
     # consts
@@ -423,11 +421,10 @@ class TimerApp(QtGui.QMainWindow):
             self.stop_state()
 
 def main():
-
+    codecs.register(lambda name: codecs.lookup('utf-8') if name == 'cp65001' else None)
     app = QtGui.QApplication(sys.argv)
     ex = TimerApp()
     sys.exit(app.exec_())
-
 
 if __name__ == "__main__":
     main()
