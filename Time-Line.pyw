@@ -11,7 +11,7 @@ from time import time, strftime
 import codecs
 codecs.register(lambda name: codecs.lookup('utf-8') if name == 'cp65001' else None)
 
-class TimerApp(QtGui.QWidget):
+class TimerApp(QtGui.QMainWindow):
     # consts
     DB_NAME = "records.db"
     APP_NAME = "Time-Line"
@@ -144,7 +144,9 @@ class TimerApp(QtGui.QWidget):
         grid.addWidget(self.lcd_timer, 2, 0, 1, 0)
 
         # main window
-        self.setLayout(grid)
+        q_widget = QtGui.QWidget(self)
+        q_widget.setLayout(grid)
+        self.setCentralWidget(q_widget)
         self.setFixedSize(300, 200)
         self.setWindowTitle(_("Time-Line"))
         self.setWindowIcon(QtGui.QIcon("icons/timer.png"))
