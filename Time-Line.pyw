@@ -141,11 +141,20 @@ class TimerApp(QtGui.QMainWindow):
         grid.addWidget(self.btn_state, 3, 0, 1, 0)
         grid.addWidget(self.lcd_timer, 2, 0, 1, 0)
 
+        # menubar
+        menuitem_exit = QtGui.QAction(_("&Exit"), self)
+        menuitem_exit.setShortcut('Ctrl+Q')
+        menuitem_exit.triggered.connect(QtGui.qApp.quit)
+
+        self.menubar = self.menuBar()
+        fileMenu = self.menubar.addMenu(_("&File"))
+        fileMenu.addAction(menuitem_exit)
+
         # main window
         q_widget = QtGui.QWidget(self)
         q_widget.setLayout(grid)
         self.setCentralWidget(q_widget)
-        self.setFixedSize(300, 200)
+        self.setFixedSize(320, 240)
         self.setWindowTitle(_("Time-Line"))
         self.setWindowIcon(QtGui.QIcon("icons/timer.png"))
         self.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
