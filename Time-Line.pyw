@@ -147,8 +147,8 @@ class TimerApp(QtGui.QMainWindow):
         menuitem_exit.triggered.connect(QtGui.qApp.quit)
 
         self.menubar = self.menuBar()
-        fileMenu = self.menubar.addMenu(_("&File"))
-        fileMenu.addAction(menuitem_exit)
+        menuitem_file = self.menubar.addMenu(_("&File"))
+        menuitem_file.addAction(menuitem_exit)
 
         # main window
         q_widget = QtGui.QWidget(self)
