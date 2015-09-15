@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-15 17:10+0700\n"
-"PO-Revision-Date: 2015-09-15 17:11+0700\n"
+"POT-Creation-Date: 2015-09-15 17:40+0700\n"
+"PO-Revision-Date: 2015-09-15 17:42+0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: bg\n"
@@ -29,7 +29,7 @@ msgstr "Грешка в базата от данни:"
 msgid "New project"
 msgstr "Нов проект"
 
-#: Time-Line.pyw:95 Time-Line.pyw:462
+#: Time-Line.pyw:95 Time-Line.pyw:465
 msgid "Project"
 msgstr "Проект"
 
@@ -92,46 +92,46 @@ msgstr ""
 "Сигурни ли сте, че искате да изтриете проекта %s заедно с всички негови "
 "записи?"
 
-#: Time-Line.pyw:459
+#: Time-Line.pyw:462
 msgid "Show Times"
 msgstr "Показване на часовете"
 
-#: Time-Line.pyw:474
+#: Time-Line.pyw:473
 msgid "Select range"
 msgstr "Избор на обхват"
 
-#: Time-Line.pyw:475
+#: Time-Line.pyw:474
 msgid "To"
 msgstr "До"
 
-#: Time-Line.pyw:486
+#: Time-Line.pyw:485
 msgid "Options"
 msgstr "Опции"
 
-#: Time-Line.pyw:487
+#: Time-Line.pyw:486
 msgid "Show time per day within range"
 msgstr "Показване на часовете за ден в зададения обхват"
 
-#: Time-Line.pyw:490
+#: Time-Line.pyw:489
 msgid "Show non-working days"
 msgstr "Показване на неработните дни"
 
-#: Time-Line.pyw:500
+#: Time-Line.pyw:499
 msgid "&Show Result"
 msgstr "&Показване на резултат"
 
-#: Time-Line.pyw:503
+#: Time-Line.pyw:502
 msgid "&Close"
 msgstr "&Затваряне"
 
-#: Time-Line.pyw:583
+#: Time-Line.pyw:605
 msgid "none"
 msgstr "няма"
 
-#: Time-Line.pyw:590
-msgid "Total time: "
+#: Time-Line.pyw:612
+msgid "Total time:"
 msgstr "Общо време:"
 
-#: Time-Line.pyw:591
+#: Time-Line.pyw:613
 msgid "Dates are in UTC"
 msgstr "Датите са в UTC"
