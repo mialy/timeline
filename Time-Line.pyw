@@ -192,12 +192,11 @@ class TimerApp(QtGui.QMainWindow):
         if result:
             self.db_cur.execute('''
                 UPDATE settings
-                SET
-                    value = :value
+                SET value = :value
                 WHERE name = :name
             ''', {
                 "name": "last_project",
-                "value": int(index)
+                "value": self.get_id_from_cbox(index)
             })
             self.db.commit()
         else:
@@ -431,7 +430,8 @@ class TimerApp(QtGui.QMainWindow):
         result = self.db_fetch_assoc(["value"])
 
         if len(result):
-            index = int(result[0]["value"])
+            id = int(result[0]["value"])
+            index = self.cbox_list.findData(id)
             self.cbox_list.setCurrentIndex(index)
 
     def strip_text(self, text):
