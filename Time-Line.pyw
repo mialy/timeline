@@ -490,7 +490,10 @@ class WindowShowTimes(QtGui.QMainWindow):
         self.cb_pass_empty.setChecked(True)
 
         # fifth line
+        font = QtGui.QFont("Monospace")
+        font.setStyleHint(QtGui.QFont.TypeWriter)
         self.output = QtGui.QPlainTextEdit()
+        self.output.setFont(font)
         self.output.setReadOnly(True)
         self.output.setFixedHeight(200)
         self.output.hide()
