@@ -452,6 +452,9 @@ class WindowShowTimes(QtGui.QMainWindow):
         super(WindowShowTimes, self).__init__(parent)
         self.init_ui()
 
+    def showEvent(self, event):
+        self.reset_ui();
+
     def init_ui(self):
         self.db_cur = self.parent.db_cur
         self.db_fetch_assoc = self.parent.db_fetch_assoc
@@ -530,6 +533,29 @@ class WindowShowTimes(QtGui.QMainWindow):
         q_widget = QtGui.QWidget(self)
         q_widget.setLayout(grid)
         self.setCentralWidget(q_widget)
+
+    def reset_ui(self):
+        range = self.get_default_date_range()
+        self.date_from.setDateTime(range["start"])
+        self.date_to.setDateTime(range["end"])
+        self.load_cbox(True)
+        self.cb_show_each_day.setChecked(True)
+        self.cb_pass_empty.setChecked(True)
+        self.cb_pass_empty.setEnabled(False)
+        self.output.setPlainText("")
+        self.output.show()
+
+    def get_default_date_range(self):
+        end = QtCore.QDateTime.currentDateTime()
+        end.setTimeSpec(QtCore.Qt.UTC)
+        end.setTime(QtCore.QTime(23, 59, 59, 999))
+        start = end.addDays(-7)
+        start.setTime(QtCore.QTime(0, 0, 0, 0))
+        ranges = {
+            "start": start,
+            "end": end
+        }
+        return ranges
 
     def on_clicked_cb_show_each_day(self):
         checked = self.cb_show_each_day.isChecked()
