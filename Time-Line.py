@@ -458,7 +458,7 @@ class WindowShowTimes(QtGui.QMainWindow):
         self.init_ui()
 
     def showEvent(self, event):
-        self.reset_ui();
+        self.reset_ui()
 
     def init_ui(self):
         self.db_cur = self.parent.db_cur
@@ -545,7 +545,7 @@ class WindowShowTimes(QtGui.QMainWindow):
         self.load_cbox(True)
         self.cb_show_each_day.setChecked(True)
         self.cb_pass_empty.setChecked(True)
-        self.cb_pass_empty.setEnabled(False)
+        self.cb_pass_empty.setEnabled(True)
         self.output.setPlainText("")
         self.output.show()
 
