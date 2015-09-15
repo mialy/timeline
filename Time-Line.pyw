@@ -469,21 +469,17 @@ class WindowShowTimes(QtGui.QMainWindow):
         self.load_cbox()
 
         # dates range line
-        time_end = QtCore.QDateTime.currentDateTime()
-        time_end.setTimeSpec(QtCore.Qt.UTC)
-        time_end.setTime(QtCore.QTime(23, 59, 59, 999))
-        time_start = time_end.addDays(-7)
-        time_start.setTime(QtCore.QTime(0, 0, 0, 0))
+        range = self.get_default_date_range()
         label_date_range = QtGui.QLabel(_("Select range"))
         label_date_range_to = QtGui.QLabel(_("To"))
         self.date_from = QtGui.QDateTimeEdit()
         self.date_from.setTimeSpec(QtCore.Qt.UTC)
         self.date_from.setCalendarPopup(True)
-        self.date_from.setDateTime(time_start)
+        self.date_from.setDateTime(range["start"])
         self.date_to = QtGui.QDateTimeEdit()
         self.date_to.setTimeSpec(QtCore.Qt.UTC)
         self.date_to.setCalendarPopup(True)
-        self.date_to.setDateTime(time_end)
+        self.date_to.setDateTime(range["end"])
 
         # third & fourth line
         label_options = QtGui.QLabel(_("Options"))
