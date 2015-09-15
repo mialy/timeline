@@ -14,6 +14,7 @@ class TimerApp(QtGui.QMainWindow):
     # consts
     DB_NAME = "records.db"
     APP_NAME = "Time-Line"
+    ICONS_DIR = "icons/"
 
     # properties
     running = False
@@ -34,6 +35,10 @@ class TimerApp(QtGui.QMainWindow):
         self.db = sqlite3.connect(dbfile)
         self.db_cur = self.db.cursor()
         gettext.install("Time-Line", "locale", unicode=True, names=['ngettext'])
+
+        # icons absolute path
+        self.ICONS_DIR  = os.path.dirname(os.path.abspath(__file__)) + os.sep
+        self.ICONS_DIR += "icons" + os.sep
 
         # init db tables
         self.db_cur.execute('PRAGMA encoding="UTF-8";')
@@ -113,7 +118,7 @@ class TimerApp(QtGui.QMainWindow):
         self.btn_state.setCheckable(True)
         self.btn_state.setDisabled(cbox_is_empty)
         self.btn_state.setToolTip(_("Press button to start the counter."))
-        self.btn_state.setIcon(QtGui.QIcon("icons/play.png"))
+        self.btn_state.setIcon(QtGui.QIcon(self.ICONS_DIR + "play.png"))
         self.btn_state.clicked.connect(self.on_clicked_btn_state)
         self.btn_state.setSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Fixed)
         self.btn_state.setMinimumSize(0, 35)
@@ -163,7 +168,7 @@ class TimerApp(QtGui.QMainWindow):
         self.setCentralWidget(q_widget)
         self.setFixedSize(320, 240)
         self.setWindowTitle(_("Time-Line"))
-        self.setWindowIcon(QtGui.QIcon("icons/timer.png"))
+        self.setWindowIcon(QtGui.QIcon(self.ICONS_DIR + "timer.png"))
         self.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
         self.show()
 
@@ -214,7 +219,7 @@ class TimerApp(QtGui.QMainWindow):
     def on_clicked_btn_state(self):
         if not self.running:
             self.running = True
-            self.btn_state.setIcon(QtGui.QIcon("icons/stop.png"))
+            self.btn_state.setIcon(QtGui.QIcon(self.ICONS_DIR + "stop.png"))
             self.btn_state.setText(_("Stop"))
             self.btn_state.setToolTip(_("Press button to stop and save the counter."))
             self.time_start = time()
@@ -248,7 +253,7 @@ class TimerApp(QtGui.QMainWindow):
 
     def stop_state(self):
         self.running = False
-        self.btn_state.setIcon(QtGui.QIcon("icons/play.png"))
+        self.btn_state.setIcon(QtGui.QIcon(self.ICONS_DIR + "play.png"))
         self.btn_state.setText(_("Start"))
         self.btn_state.setToolTip(_("Press button to start the counter."))
         self.qtimer.stop()
