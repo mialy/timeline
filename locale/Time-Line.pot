@@ -3,69 +3,137 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: Time-Line\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-23 12:35+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2015-09-15 17:10+0700\n"
+"PO-Revision-Date: 2015-09-15 17:10+0700\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.7.5\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: ./../\n"
+"X-Poedit-SearchPath-0: .\n"
 
-#: Time-Line.pyw:64
+#: Time-Line.pyw:56
+msgid "Error"
+msgstr ""
+
+#: Time-Line.pyw:57
+msgid "Database error:"
+msgstr ""
+
+#: Time-Line.pyw:94
 msgid "New project"
 msgstr ""
 
-#: Time-Line.pyw:65
+#: Time-Line.pyw:95 Time-Line.pyw:462
 msgid "Project"
 msgstr ""
 
-#: Time-Line.pyw:81 Time-Line.pyw:159
+#: Time-Line.pyw:112 Time-Line.pyw:252
 msgid "Start"
 msgstr ""
 
-#: Time-Line.pyw:84 Time-Line.pyw:160
+#: Time-Line.pyw:115 Time-Line.pyw:253
 msgid "Press button to start the counter."
 msgstr ""
 
-#: Time-Line.pyw:90
+#: Time-Line.pyw:121
 msgid "Add"
 msgstr ""
 
-#: Time-Line.pyw:93
+#: Time-Line.pyw:124
 msgid "Delete"
 msgstr ""
 
-#: Time-Line.pyw:117
+#: Time-Line.pyw:146
+msgid "Show &Times..."
+msgstr ""
+
+#: Time-Line.pyw:150
+msgid "&Exit"
+msgstr ""
+
+#: Time-Line.pyw:155
+msgid "&File"
+msgstr ""
+
+#: Time-Line.pyw:165
 msgid "Time-Line"
 msgstr ""
 
-#: Time-Line.pyw:125
+#: Time-Line.pyw:218
 msgid "Stop"
 msgstr ""
 
-#: Time-Line.pyw:126
+#: Time-Line.pyw:219
 msgid "Press button to stop and save the counter."
 msgstr ""
 
-#: Time-Line.pyw:183
+#: Time-Line.pyw:276
 msgid "Info"
 msgstr ""
 
-#: Time-Line.pyw:184
+#: Time-Line.pyw:277
 msgid "Please Enter a project name."
 msgstr ""
 
-#: Time-Line.pyw:223
+#: Time-Line.pyw:316
 msgid "Confirmation"
 msgstr ""
 
-#: Time-Line.pyw:224
+#: Time-Line.pyw:317
 #, python-format
 msgid "Are you sure you want to delete project %s and all his records?"
+msgstr ""
+
+#: Time-Line.pyw:459
+msgid "Show Times"
+msgstr ""
+
+#: Time-Line.pyw:474
+msgid "Select range"
+msgstr ""
+
+#: Time-Line.pyw:475
+msgid "To"
+msgstr ""
+
+#: Time-Line.pyw:486
+msgid "Options"
+msgstr ""
+
+#: Time-Line.pyw:487
+msgid "Show time per day within range"
+msgstr ""
+
+#: Time-Line.pyw:490
+msgid "Show non-working days"
+msgstr ""
+
+#: Time-Line.pyw:500
+msgid "&Show Result"
+msgstr ""
+
+#: Time-Line.pyw:503
+msgid "&Close"
+msgstr ""
+
+#: Time-Line.pyw:583
+msgid "none"
+msgstr ""
+
+#: Time-Line.pyw:590
+msgid "Total time: "
+msgstr ""
+
+#: Time-Line.pyw:591
+msgid "Dates are in UTC"
 msgstr ""
