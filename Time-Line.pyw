@@ -609,7 +609,7 @@ class WindowShowTimes(QtGui.QMainWindow):
                 output += str(x) + ": " + str(dates[x]) + "\n"
             output += "-" * 36 + "\n"
 
-        output += _("Total time: ") + self.secondsToTime(total) + "\n\n"
+        output += _("Total time:") + " " + self.secondsToTime(total) + "\n\n"
         output += _("Dates are in UTC") + "\n"
         self.output.setPlainText(output)
         self.output.show()
