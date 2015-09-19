@@ -13,3 +13,6 @@ for different projects, into SQLite3 database.
 Windows: ```%appdata%\Time-Line\records.db```
 
 Linux: ```~/.config/Time-Line/records.db```
+
+Mac OS X: ```~/.config/Time-Line/records.db```
+
