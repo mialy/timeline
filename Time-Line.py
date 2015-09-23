@@ -230,6 +230,7 @@ class TimerApp(QtGui.QMainWindow):
             self.btn_state.setChecked(True)
 
             index = self.cbox_list.currentIndex()
+            times = self.get_times_list()
 
             current_timer_rowid = 0
             self.db_cur.execute('''
@@ -241,9 +242,9 @@ class TimerApp(QtGui.QMainWindow):
                 ) VALUES (:p_id, :date_start, :date_end, :duration)
             ''', {
                 "p_id": self.get_id_from_cbox(index),
-                "date_start": int(self.time_start),
-                "date_end": int(self.time_end),
-                "duration": int(self.time_end - self.time_start)
+                "date_start": times["start"],
+                "date_end": times["end"],
+                "duration": times["duration"]
             })
             self.db.commit()
             self.current_timer_rowid = self.db_cur.lastrowid
@@ -259,6 +260,8 @@ class TimerApp(QtGui.QMainWindow):
         self.qtimer.stop()
         self.btn_state.setChecked(False)
 
+        times = self.get_times_list()
+
         self.db_cur.execute('''
             UPDATE times
             SET
@@ -266,8 +269,8 @@ class TimerApp(QtGui.QMainWindow):
                 duration = :duration
             WHERE rowid = :id
         ''', {
-            "date_end": int(self.time_end),
-            "duration": int(self.time_end - self.time_start),
+            "date_end": times["end"],
+            "duration": times["duration"],
             "id": self.current_timer_rowid
         })
         self.db.commit()
@@ -351,6 +354,7 @@ class TimerApp(QtGui.QMainWindow):
             return
 
         self.time_mid = time()
+        times = self.get_times_list()
 
         self.db_cur.execute('''
             UPDATE times
@@ -359,8 +363,8 @@ class TimerApp(QtGui.QMainWindow):
                 duration = :duration
             WHERE rowid = :id
         ''', {
-            "date_end": int(self.time_end),
-            "duration": int(self.time_end - self.time_start),
+            "date_end": times["end"],
+            "duration": times["duration"],
             "id": self.current_timer_rowid
         })
         self.db.commit()
@@ -371,6 +375,16 @@ class TimerApp(QtGui.QMainWindow):
         minutes, seconds = divmod(remainder, 60)
         time = "%02d:%02d:%02d" % (hours, minutes, seconds)
         return time
+
+    def get_times_list(self):
+        start = int(self.time_start)
+        end = int(self.time_end)
+        duration = int(end - start)
+        return {
+            "start": start,
+            "end": end,
+            "duration": duration
+        }
 
     def db_fetch_assoc(self, cols):
         out = []
