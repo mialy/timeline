@@ -518,7 +518,8 @@ class WindowShowTimes(QtGui.QMainWindow):
         label_project = QtGui.QLabel(_("Project"))
         self.cbox_list = QtGui.QComboBox(self)
         self.cbox_list.setInsertPolicy(QtGui.QComboBox.InsertAlphabetically)
-        self.cbox_list.setEditable(False)
+        self.cbox_list.setEditable(True)
+        self.cbox_list.setAutoCompletion(True)
         self.load_cbox()
 
         # dates range line
