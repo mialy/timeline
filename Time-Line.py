@@ -232,27 +232,34 @@ class TimerApp(QtGui.QMainWindow):
             index = self.cbox_list.currentIndex()
             times = self.get_times_list()
 
-            current_timer_rowid = 0
-            self.db_cur.execute('''
-                INSERT INTO times (
-                    project_id,
-                    date_start,
-                    date_end,
-                    duration
-                ) VALUES (:p_id, :date_start, :date_end, :duration)
-            ''', {
-                "p_id": self.get_id_from_cbox(index),
-                "date_start": times["start"],
-                "date_end": times["end"],
-                "duration": times["duration"]
-            })
-            self.db.commit()
-            self.current_timer_rowid = self.db_cur.lastrowid
+            try:
+                current_timer_rowid = 0
+                self.db_cur.execute('''
+                    INSERT INTO times (
+                        project_id,
+                        date_start,
+                        date_end,
+                        duration
+                    ) VALUES (:p_id, :date_start, :date_end, :duration)
+                ''', {
+                    "p_id": self.get_id_from_cbox(index),
+                    "date_start": times["start"],
+                    "date_end": times["end"],
+                    "duration": times["duration"]
+                })
+                self.db.commit()
+                self.current_timer_rowid = self.db_cur.lastrowid
+            except sqlite3.Error as e:
+                self.stop_state(pass_db_update = True)
+                QtGui.QMessageBox.critical(self,
+                    _("Error"),
+                    _("Database error:") + " " + e.args[0]
+                )
 
         else:
             self.stop_state()
 
-    def stop_state(self):
+    def stop_state(self, pass_db_update = False):
         self.running = False
         self.btn_state.setIcon(QtGui.QIcon(self.ICONS_DIR + "play.png"))
         self.btn_state.setText(_("Start"))
@@ -260,20 +267,29 @@ class TimerApp(QtGui.QMainWindow):
         self.qtimer.stop()
         self.btn_state.setChecked(False)
 
+        if pass_db_update:
+            return
+
         times = self.get_times_list()
 
-        self.db_cur.execute('''
-            UPDATE times
-            SET
-                date_end = :date_end,
-                duration = :duration
-            WHERE rowid = :id
-        ''', {
-            "date_end": times["end"],
-            "duration": times["duration"],
-            "id": self.current_timer_rowid
-        })
-        self.db.commit()
+        try:
+            self.db_cur.execute('''
+                UPDATE times
+                SET
+                    date_end = :date_end,
+                    duration = :duration
+                WHERE rowid = :id
+            ''', {
+                "date_end": times["end"],
+                "duration": times["duration"],
+                "id": self.current_timer_rowid
+            })
+            self.db.commit()
+        except sqlite3.Error as e:
+            QtGui.QMessageBox.critical(self,
+                _("Error"),
+                _("Database error:") + " " + e.args[0]
+            )
 
     def on_clicked_btn_add(self):
         text = self.edit_project.text()
@@ -356,18 +372,25 @@ class TimerApp(QtGui.QMainWindow):
         self.time_mid = time()
         times = self.get_times_list()
 
-        self.db_cur.execute('''
-            UPDATE times
-            SET
-                date_end = :date_end,
-                duration = :duration
-            WHERE rowid = :id
-        ''', {
-            "date_end": times["end"],
-            "duration": times["duration"],
-            "id": self.current_timer_rowid
-        })
-        self.db.commit()
+        try:
+            self.db_cur.execute('''
+                UPDATE times
+                SET
+                    date_end = :date_end,
+                    duration = :duration
+                WHERE rowid = :id
+            ''', {
+                "date_end": times["end"],
+                "duration": times["duration"],
+                "id": self.current_timer_rowid
+            })
+            self.db.commit()
+        except sqlite3.Error as e:
+            self.stop_state(pass_db_update = True)
+            QtGui.QMessageBox.critical(self,
+                _("Error"),
+                _("Database error:") + " " + e.args[0]
+            )
 
     def get_time_delta(self):
         time = int(self.time_end - self.time_start)
