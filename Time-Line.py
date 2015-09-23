@@ -41,7 +41,9 @@ class TimerApp(QtGui.QMainWindow):
         self.ICONS_DIR += "icons" + os.sep
 
         # init db tables
-        self.db_cur.execute('PRAGMA encoding="UTF-8";')
+        self.db_cur.execute('''
+            PRAGMA encoding="UTF-8";
+        ''')
 
         try:
             self.db_cur.execute('''
@@ -316,7 +318,10 @@ class TimerApp(QtGui.QMainWindow):
             result = self.db_fetch_assoc(["rowid"])
 
             if not len(result):
-                self.db_cur.execute("INSERT INTO projects (name) VALUES (:name)", {"name":text})
+                self.db_cur.execute('''
+                    INSERT INTO projects (name)
+                    VALUES (:name)
+                ''', {"name":text})
                 self.db.commit()
                 self.cbox_list.addItem(text, self.db_cur.lastrowid)
 
@@ -345,10 +350,16 @@ class TimerApp(QtGui.QMainWindow):
                 return
 
             # remove elements from DB
-            self.db_cur.execute("DELETE FROM times WHERE project_id = :id", {"id": id})
+            self.db_cur.execute('''
+                DELETE FROM times
+                WHERE project_id = :id
+            ''', {"id": id})
             self.db.commit()
 
-            self.db_cur.execute("DELETE FROM projects WHERE rowid = :id", {"id": id})
+            self.db_cur.execute('''
+                DELETE FROM projects
+                WHERE rowid = :id
+            ''', {"id": id})
             self.db.commit()
 
             self.cbox_list.removeItem(index)
