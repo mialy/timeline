@@ -2,8 +2,8 @@ Time-Line
 -----------
 
 ### Description:
-Time-Line is simple Python/Qt4-based application, that record spend hours
-for different projects, into SQLite3 database.
+Time-Line is a simple Python/Qt4-based application, that record spend hours
+into SQLite3 database.
 
 ### Screenshot:
 ![Main Screen](http://i.imgur.com/RRV7enw.png)
