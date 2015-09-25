@@ -602,7 +602,7 @@ class WindowShowTimes(QtGui.QMainWindow):
         end = QtCore.QDateTime.currentDateTime()
         end.setTimeSpec(QtCore.Qt.UTC)
         end.setTime(QtCore.QTime(23, 59, 59, 999))
-        start = end.addDays(-7)
+        start = end.addDays(-6)
         start.setTime(QtCore.QTime(0, 0, 0, 0))
         ranges = {
             "start": start,
