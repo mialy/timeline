@@ -34,7 +34,11 @@ class TimerApp(QtGui.QMainWindow):
         dbfile = self.get_db_filename()
         self.db = sqlite3.connect(dbfile)
         self.db_cur = self.db.cursor()
-        gettext.install("Time-Line", "locale", unicode=True, names=['ngettext'])
+
+        if sys.version_info.major < 3:
+            gettext.install("Time-Line", "locale", unicode=True, names=['ngettext'])
+        else:
+            gettext.install("Time-Line", "locale", names=['ngettext'])
 
         # icons absolute path
         self.ICONS_DIR  = os.path.dirname(os.path.abspath(__file__)) + os.sep
