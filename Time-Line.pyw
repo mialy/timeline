@@ -2,4 +2,5 @@
 # -*- coding: utf-8 -*-
 
 import os
-exec(open(os.path.dirname(os.path.abspath(__file__)) + os.sep + "Time-Line.py").read())
+file = os.path.dirname(os.path.abspath(__file__)) + os.sep + "Time-Line.py"
+exec(open(file).read())

@@ -10,6 +10,7 @@ import datetime
 from PyQt4 import QtGui, QtCore
 from time import time, strftime
 
+
 class TimerApp(QtGui.QMainWindow):
     # consts
     DB_NAME = "records.db"
@@ -36,12 +37,13 @@ class TimerApp(QtGui.QMainWindow):
         self.db_cur = self.db.cursor()
 
         if sys.version_info.major < 3:
-            gettext.install("Time-Line", "locale", unicode=True, names=['ngettext'])
+            gettext.install("Time-Line", "locale", unicode=True,
+                            names=['ngettext'])
         else:
             gettext.install("Time-Line", "locale", names=['ngettext'])
 
         # icons absolute path
-        self.ICONS_DIR  = os.path.dirname(os.path.abspath(__file__)) + os.sep
+        self.ICONS_DIR = os.path.dirname(os.path.abspath(__file__)) + os.sep
         self.ICONS_DIR += "icons" + os.sep
 
         # init db tables
@@ -63,7 +65,8 @@ class TimerApp(QtGui.QMainWindow):
             self.db.commit()
         except sqlite3.Error as e:
             self.init_ui()
-            QtGui.QMessageBox.critical(self,
+            QtGui.QMessageBox.critical(
+                self,
                 _("Error"),
                 _("Database error:") + " " + e.args[0]
             )
@@ -126,7 +129,10 @@ class TimerApp(QtGui.QMainWindow):
         self.btn_state.setToolTip(_("Press button to start the counter."))
         self.btn_state.setIcon(QtGui.QIcon(self.ICONS_DIR + "play.png"))
         self.btn_state.clicked.connect(self.on_clicked_btn_state)
-        self.btn_state.setSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Fixed)
+        self.btn_state.setSizePolicy(
+            QtGui.QSizePolicy.Expanding,
+            QtGui.QSizePolicy.Fixed
+        )
         self.btn_state.setMinimumSize(0, 35)
 
         self.btn_add = QtGui.QPushButton(_("Add"), self)
@@ -227,7 +233,9 @@ class TimerApp(QtGui.QMainWindow):
             self.running = True
             self.btn_state.setIcon(QtGui.QIcon(self.ICONS_DIR + "stop.png"))
             self.btn_state.setText(_("Stop"))
-            self.btn_state.setToolTip(_("Press button to stop and save the counter."))
+            self.btn_state.setToolTip(
+                _("Press button to stop and save the counter.")
+            )
             self.time_start = time()
             self.time_end = time()
             self.time_mid = time()
@@ -256,8 +264,9 @@ class TimerApp(QtGui.QMainWindow):
                 self.db.commit()
                 self.current_timer_rowid = self.db_cur.lastrowid
             except sqlite3.Error as e:
-                self.stop_state(pass_db_update = True)
-                QtGui.QMessageBox.critical(self,
+                self.stop_state(pass_db_update=True)
+                QtGui.QMessageBox.critical(
+                    self,
                     _("Error"),
                     _("Database error:") + " " + e.args[0]
                 )
@@ -265,7 +274,7 @@ class TimerApp(QtGui.QMainWindow):
         else:
             self.stop_state()
 
-    def stop_state(self, pass_db_update = False):
+    def stop_state(self, pass_db_update=False):
         self.running = False
         self.btn_state.setIcon(QtGui.QIcon(self.ICONS_DIR + "play.png"))
         self.btn_state.setText(_("Start"))
@@ -292,7 +301,8 @@ class TimerApp(QtGui.QMainWindow):
             })
             self.db.commit()
         except sqlite3.Error as e:
-            QtGui.QMessageBox.critical(self,
+            QtGui.QMessageBox.critical(
+                self,
                 _("Error"),
                 _("Database error:") + " " + e.args[0]
             )
@@ -302,7 +312,8 @@ class TimerApp(QtGui.QMainWindow):
         text = self.strip_text(text)
 
         if len(text) == 0:
-            QtGui.QMessageBox.information(self,
+            QtGui.QMessageBox.information(
+                self,
                 _("Info"),
                 _("Please Enter a project name.")
             )
@@ -318,14 +329,14 @@ class TimerApp(QtGui.QMainWindow):
                 FROM projects
                 WHERE name = :name COLLATE NOCASE
                 LIMIT 1
-            ''', {"name":text})
+            ''', {"name": text})
             result = self.db_fetch_assoc(["rowid"])
 
             if not len(result):
                 self.db_cur.execute('''
                     INSERT INTO projects (name)
                     VALUES (:name)
-                ''', {"name":text})
+                ''', {"name": text})
                 self.db.commit()
                 self.cbox_list.addItem(text, self.db_cur.lastrowid)
 
@@ -337,7 +348,6 @@ class TimerApp(QtGui.QMainWindow):
                 self.btn_del.setDisabled(False)
                 self.cbox_list.setDisabled(False)
 
-
         self.edit_project.setText("")
 
     def on_clicked_btn_del(self):
@@ -345,10 +355,13 @@ class TimerApp(QtGui.QMainWindow):
         index = self.cbox_list.currentIndex()
         id = self.get_id_from_cbox(index)
         if id >= 0:
-            isOk = QtGui.QMessageBox.warning(self,
+            isOk = QtGui.QMessageBox.warning(
+                self,
                 _("Confirmation"),
-                _("Are you sure you want to delete project %s and all his records?") % item,
-                QtGui.QMessageBox.No | QtGui.QMessageBox.Yes)
+                _("Are you sure you want to delete project %s and all his "
+                  "records?") % item,
+                QtGui.QMessageBox.No | QtGui.QMessageBox.Yes
+            )
 
             if isOk == QtGui.QMessageBox.No:
                 return
@@ -401,8 +414,9 @@ class TimerApp(QtGui.QMainWindow):
             })
             self.db.commit()
         except sqlite3.Error as e:
-            self.stop_state(pass_db_update = True)
-            QtGui.QMessageBox.critical(self,
+            self.stop_state(pass_db_update=True)
+            QtGui.QMessageBox.critical(
+                self,
                 _("Error"),
                 _("Database error:") + " " + e.args[0]
             )
@@ -436,10 +450,13 @@ class TimerApp(QtGui.QMainWindow):
         return out
 
     def get_db_filename(self):
-        cfg = QtCore.QSettings(QtCore.QSettings.IniFormat,
+        cfg = QtCore.QSettings(
+            QtCore.QSettings.IniFormat,
             QtCore.QSettings.UserScope,
-            self.APP_NAME, "application")
-        dir = self.strip_text(QtCore.QFileInfo(cfg.fileName()).absolutePath() + "/")
+            self.APP_NAME, "application"
+        )
+        dir = QtCore.QFileInfo(cfg.fileName()).absolutePath() + "/"
+        dir = self.strip_text(dir)
 
         if not os.path.exists(dir):
             os.makedirs(dir)
@@ -459,7 +476,7 @@ class TimerApp(QtGui.QMainWindow):
             id = int(self.cbox_list.itemData(index))
         return id
 
-    def load_cbox(self, clear_current = False):
+    def load_cbox(self, clear_current=False):
         if clear_current:
             self.cbox_list.clear()
 
@@ -503,8 +520,9 @@ class TimerApp(QtGui.QMainWindow):
         if self.running:
             self.stop_state()
 
+
 class WindowShowTimes(QtGui.QMainWindow):
-    def __init__(self, parent = None):
+    def __init__(self, parent=None):
         self.parent = parent
         super(WindowShowTimes, self).__init__(parent)
         self.init_ui()
@@ -541,7 +559,9 @@ class WindowShowTimes(QtGui.QMainWindow):
 
         # third & fourth line
         label_options = QtGui.QLabel(_("Options"))
-        self.cb_show_each_day = QtGui.QCheckBox(_("Show time per day within range"))
+        self.cb_show_each_day = QtGui.QCheckBox(
+            _("Show time per day within range")
+        )
         self.cb_show_each_day.setChecked(True)
         self.cb_show_each_day.clicked.connect(self.on_clicked_cb_show_each_day)
         self.cb_pass_empty = QtGui.QCheckBox(_("Show non-working days"))
@@ -659,7 +679,8 @@ class WindowShowTimes(QtGui.QMainWindow):
 
         if pass_empty_days and show_days:
             for x in range(date_from, date_to, 86400):
-                key = str(datetime.datetime.fromtimestamp(x).strftime('%Y-%m-%d'))
+                key = datetime.datetime.fromtimestamp(x).strftime('%Y-%m-%d')
+                key = str(key)
                 if key in dates:
                     output += str(key) + ": " + str(dates[key]) + "\n"
                 else:
@@ -675,12 +696,12 @@ class WindowShowTimes(QtGui.QMainWindow):
         self.output.setPlainText(output)
         self.output.show()
 
-    def secondsToTime(self, seconds = 0):
+    def secondsToTime(self, seconds=0):
         minutes, seconds = divmod(seconds, 60)
         hours, minutes = divmod(minutes, 60)
         return "%02d:%02d:%02d" % (hours, minutes, seconds)
 
-    def load_cbox(self, clear_current = False):
+    def load_cbox(self, clear_current=False):
         if clear_current:
             self.cbox_list.clear()
 
@@ -712,8 +733,11 @@ class WindowShowTimes(QtGui.QMainWindow):
             index = self.cbox_list.findData(id)
             self.cbox_list.setCurrentIndex(index)
 
+
 def main():
-    codecs.register(lambda name: codecs.lookup('utf-8') if name == 'cp65001' else None)
+    codecs.register(
+        lambda name: codecs.lookup('utf-8') if name == 'cp65001' else None
+    )
     app = QtGui.QApplication(sys.argv)
     ex = TimerApp()
     sys.exit(app.exec_())
