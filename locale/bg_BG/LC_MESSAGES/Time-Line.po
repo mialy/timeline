@@ -7,131 +7,135 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-15 17:40+0700\n"
-"PO-Revision-Date: 2015-09-15 17:42+0700\n"
+"POT-Creation-Date: 2015-11-07 00:28+0200\n"
+"PO-Revision-Date: 2015-11-07 00:28+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.7.5\n"
+"X-Generator: Poedit 1.8.6\n"
 
-#: Time-Line.pyw:56
+#: Time-Line.py:70 Time-Line.py:269 Time-Line.py:305 Time-Line.py:419
 msgid "Error"
 msgstr "Грешка"
 
-#: Time-Line.pyw:57
+#: Time-Line.py:71 Time-Line.py:270 Time-Line.py:306 Time-Line.py:420
 msgid "Database error:"
 msgstr "Грешка в базата от данни:"
 
-#: Time-Line.pyw:94
+#: Time-Line.py:108
 msgid "New project"
 msgstr "Нов проект"
 
-#: Time-Line.pyw:95 Time-Line.pyw:465
+#: Time-Line.py:109 Time-Line.py:541
 msgid "Project"
 msgstr "Проект"
 
-#: Time-Line.pyw:112 Time-Line.pyw:252
+#: Time-Line.py:126 Time-Line.py:279
 msgid "Start"
 msgstr "Начало"
 
-#: Time-Line.pyw:115 Time-Line.pyw:253
+#: Time-Line.py:129 Time-Line.py:280
 msgid "Press button to start the counter."
 msgstr "Натиснете бутона, за да стартирате брояча."
 
-#: Time-Line.pyw:121
+#: Time-Line.py:138
 msgid "Add"
 msgstr "Добави"
 
-#: Time-Line.pyw:124
+#: Time-Line.py:141
 msgid "Delete"
 msgstr "Изтриване"
 
-#: Time-Line.pyw:146
+#: Time-Line.py:163
 msgid "Show &Times..."
 msgstr "Показване на &Часовете..."
 
-#: Time-Line.pyw:150
+#: Time-Line.py:167
 msgid "&Exit"
 msgstr "&Изход"
 
-#: Time-Line.pyw:155
+#: Time-Line.py:172
 msgid "&File"
 msgstr "&Файл"
 
-#: Time-Line.pyw:165
+#: Time-Line.py:182
 msgid "Time-Line"
 msgstr "Time-Line"
 
-#: Time-Line.pyw:218
+#: Time-Line.py:234
 msgid "Stop"
 msgstr "Спиране"
 
-#: Time-Line.pyw:219
+#: Time-Line.py:236
 msgid "Press button to stop and save the counter."
 msgstr "Натиснете бутона, за да спрете и съхраните брояча."
 
-#: Time-Line.pyw:276
+#: Time-Line.py:316
 msgid "Info"
 msgstr "Информация"
 
-#: Time-Line.pyw:277
+#: Time-Line.py:317
 msgid "Please Enter a project name."
 msgstr "Моля, въведете име на проекта."
 
-#: Time-Line.pyw:316
+#: Time-Line.py:359
 msgid "Confirmation"
 msgstr "Потвърждение"
 
-#: Time-Line.pyw:317
+#: Time-Line.py:360
 #, python-format
 msgid "Are you sure you want to delete project %s and all his records?"
 msgstr ""
 "Сигурни ли сте, че искате да изтриете проекта %s заедно с всички негови "
 "записи?"
 
-#: Time-Line.pyw:462
+#: Time-Line.py:538
 msgid "Show Times"
 msgstr "Показване на часовете"
 
-#: Time-Line.pyw:473
+#: Time-Line.py:550
 msgid "Select range"
 msgstr "Избор на обхват"
 
-#: Time-Line.pyw:474
+#: Time-Line.py:551
 msgid "To"
 msgstr "До"
 
-#: Time-Line.pyw:485
+#: Time-Line.py:562
 msgid "Options"
 msgstr "Опции"
 
-#: Time-Line.pyw:486
+#: Time-Line.py:564
 msgid "Show time per day within range"
 msgstr "Показване на часовете за ден в зададения обхват"
 
-#: Time-Line.pyw:489
+#: Time-Line.py:568
 msgid "Show non-working days"
 msgstr "Показване на неработните дни"
 
-#: Time-Line.pyw:499
+#: Time-Line.py:581
 msgid "&Show Result"
 msgstr "&Показване на резултат"
 
-#: Time-Line.pyw:502
+#: Time-Line.py:584
 msgid "&Close"
 msgstr "&Затваряне"
 
-#: Time-Line.pyw:605
+#: Time-Line.py:689
 msgid "none"
 msgstr "няма"
 
-#: Time-Line.pyw:612
+#: Time-Line.py:696
 msgid "Total time:"
 msgstr "Общо време:"
 
-#: Time-Line.pyw:613
+#: Time-Line.py:697
 msgid "Dates are in UTC"
 msgstr "Датите са в UTC"
+
+#: Time-Line.py:724
+msgid "< All projects >"
+msgstr "< Всички проекти >"
