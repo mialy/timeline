@@ -469,11 +469,13 @@ class TimerApp(QtGui.QMainWindow):
 
         return db
 
-    def get_id_from_cbox(self, index):
+    def get_id_from_cbox(self, index, list=None):
+        list = list if list is not None else self.cbox_list
+
         try:
-            id = int(self.cbox_list.itemData(index).toPyObject())
+            id = int(list.itemData(index).toPyObject())
         except:
-            id = int(self.cbox_list.itemData(index))
+            id = int(list.itemData(index))
         return id
 
     def load_cbox(self, clear_current=False):
@@ -644,7 +646,7 @@ class WindowShowTimes(QtGui.QMainWindow):
     def on_clicked_btn_show_result(self):
         output = ""
         index = int(self.cbox_list.currentIndex())
-        project_id = self.parent.get_id_from_cbox(index)
+        project_id = self.parent.get_id_from_cbox(index, self.cbox_list)
         date_from = self.date_from.dateTime().toTime_t()
         date_to = self.date_to.dateTime().toTime_t()
         show_days = self.cb_show_each_day.isChecked()
@@ -656,7 +658,7 @@ class WindowShowTimes(QtGui.QMainWindow):
                 SUM(duration) AS duration
             FROM times
             WHERE
-                project_id = :project_id
+                (:project_id <= 0 OR project_id = :project_id)
                 AND date_start <= :date_to
                 AND date_end >= :date_from
             GROUP BY date
@@ -664,7 +666,8 @@ class WindowShowTimes(QtGui.QMainWindow):
         ''', {
             "project_id": project_id,
             "date_from": date_from,
-            "date_to": date_to})
+            "date_to": date_to
+        })
         result = self.db_fetch_assoc(["date", "duration"])
         if result is None:
             return
@@ -718,6 +721,8 @@ class WindowShowTimes(QtGui.QMainWindow):
         if hasattr(self, "projects") and len(self.projects) > 0:
             for cols in self.projects:
                 self.cbox_list.addItem(cols["name"], cols["id"])
+
+        self.cbox_list.insertItem(0, _('< All projects >'), 0)
 
         # get previous selected project, if available
         self.db_cur.execute('''
