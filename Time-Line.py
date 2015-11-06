@@ -184,16 +184,14 @@ class TimerApp(QtGui.QMainWindow):
         self.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
         self.show()
 
-        # init stats window instance
-        self.window_show_times = WindowShowTimes(self)
-        self.window_show_times.setWindowFlags(QtCore.Qt.Window)
-        self.window_show_times.setParent(self)
-        self.window_show_times.windowIcon()
-        self.window_show_times.setWindowModality(QtCore.Qt.WindowModal)
-        self.window_show_times.setAttribute(QtCore.Qt.WA_DeleteOnClose)
-
     def on_clicked_menuitem_showtimes(self):
-        self.window_show_times.show()
+        window_show_times = WindowShowTimes(self)
+        window_show_times.setWindowFlags(QtCore.Qt.Window)
+        window_show_times.setParent(self)
+        window_show_times.windowIcon()
+        window_show_times.setWindowModality(QtCore.Qt.WindowModal)
+        window_show_times.setAttribute(QtCore.Qt.WA_DeleteOnClose, True)
+        window_show_times.show()
 
     # save selected project into db for next run
     def on_change_cbox_list(self):
