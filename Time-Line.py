@@ -190,6 +190,7 @@ class TimerApp(QtGui.QMainWindow):
         self.window_show_times.setParent(self)
         self.window_show_times.windowIcon()
         self.window_show_times.setWindowModality(QtCore.Qt.WindowModal)
+        self.window_show_times.setAttribute(QtCore.Qt.WA_DeleteOnClose)
 
     def on_clicked_menuitem_showtimes(self):
         self.window_show_times.show()
