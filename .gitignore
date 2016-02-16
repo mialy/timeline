@@ -4,3 +4,7 @@ Thumbs.db
 *.patch
 *.mo
 
+# Python specific
+*.py[cod]
+*$py.class
+__pycache__/
