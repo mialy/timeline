@@ -42,7 +42,7 @@ class MainWindow(QtGui.QMainWindow):
             gettext.install("Time-Line", "locale", names=['ngettext'])
 
         # icons absolute path
-        self.ICONS_DIR = os.path.dirname(os.path.abspath(__file__)) + os.sep
+        self.ICONS_DIR = os.path.dirname(os.path.abspath(sys.argv[0])) + os.sep
         self.ICONS_DIR += "icons" + os.sep
 
         # init db tables
